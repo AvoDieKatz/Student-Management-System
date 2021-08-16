@@ -1,42 +1,45 @@
+package DataTransferObjects;
 
 public class Student {
 
-    private int userID;
+    private Integer userID;
     private String fullname;
-    private int age;
+    private Integer age;
     private String address;
-    private float gpa;
-    private int[] classmark;
-    private int tuition;
-    private int totalcredits;
-    Course course;
 
-    
-    public Student(int userID, String fullname, int age, String address) {
+    private int tuition;
+    private int initialFee;
+    private int totalcredits;
+
+    private Gpa gpa;
+    private Course course;
+
+    //Constructor for taking basic info
+    public Student(Integer userID, String fullname, Integer age, String address, int initialFee, Course course) {
         this.userID = userID;
         this.fullname = fullname;
         this.age = age;
         this.address = address;
-        this.gpa = gpa;
-        this.classmark = classmark;
-        this.totalcredits = totalcredits;
-        this.tuition = tuition;
+        this.initialFee = initialFee;
+        this.course = course;
     }
-    
-//    public StudentIterator<Student> iterator() {
-//        return new MyStudentIterator();
-//    }
-//    
-//    class MyStudentIterator implements StudentIterator<Student> {
-//        
-//    }
-    
+
+    //Constructor for taking course list
+    //Implementing
+    public Student(Course course) {
+        this.course = course;
+    }
+
     @Override
     public String toString() {
-        return "Student ID= " + userID + "\n"
-                + "Student Name= " + fullname + "\n"
-                + "Student Age= " + age + "\n"
-                + "Student Address= " + address + "\n";
+        return "Student ID: " + getUserID() + "\n"
+                + "Student Name: " + getFullname() + "\n"
+                + "Student Age: " + getAge() + "\n"
+                + "Student Address: " + getAddress() + "\n"
+                + "Initial Fee: " +getInitialFee() + " USD\n"
+                + "Courses: " + getCourse() + "\n"
+                + "Tuition: " + getTuition() + " USD (Initial fee * credits)\n"
+                + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     }
 
     public int getUserID() {
@@ -71,11 +74,35 @@ public class Student {
         this.address = address;
     }
 
-    public float getGpa() {
+    public int getTotalcredits() {
+        return totalcredits;
+    }
+
+    public void setTotalcredits(int totalcredits) {
+        this.totalcredits = totalcredits;
+    }
+
+    public int getTuition() {
+        return tuition;
+    }
+
+    public void setTuition(int tuition) {
+        this.tuition = tuition;
+    }
+
+    public int getInitialFee() {
+        return initialFee;
+    }
+
+    public void setInitialFee(int initialFee) {
+        this.initialFee = initialFee;
+    }
+
+    public Gpa getGpa() {
         return this.gpa;
     }
 
-    public void setGpa(float gpa) {
+    public void setGpa(Gpa gpa) {
         this.gpa = gpa;
     }
 
@@ -85,16 +112,6 @@ public class Student {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public int[] getClassMark() {
-        // TODO - implement Student.getClassMark
-        throw new UnsupportedOperationException();
-    }
-
-    public void setClassMark(int mark) {
-        // TODO - implement Student.setClassMark
-        throw new UnsupportedOperationException();
     }
 
 }

@@ -1,10 +1,13 @@
+package DataAccessObjects;
 
+import DataTransferObjects.Student;
+import DataTransferObjects.Course;
 import java.util.List;
 
 
-public interface IManage {
+public interface IStudent {
 
-    //Student
+    //Student    
     void addStudent(Student student);
 
     void editStudent(Student student);
@@ -15,30 +18,20 @@ public interface IManage {
 
     int getStudentElIndex(int userID);
 
-    boolean checkStudentExist(Student userID);
+    boolean checkStudentExist(Integer userID);
     
-    List<Student> viewAllStudent();
+    boolean checkEmpty();
     
-    public void allStudent();
-
-    //Course
-    void addCourse(Course course);
-
-    void editCourse(Course course);
-
-    void deleteCourse(Integer courseID);
-
-    Course searchCourse(Integer courseID);
-
-    int getCourseElIndex(Integer courseID);
-
-    boolean checkCourseExist(Course courseID);
-
-    //Random bs GOOOO
-    void addMark();
-
-    void editMark();
-
-    void applyFeeExchangeStudent();
-
+    int checkSize();
+    
+    List<Student> viewAllStudents();
+    
+    void allStudents();
+    
+    void addToCourse(Course course);
+    
+    void viewAttendingCourses();
+    
+    void calcTuition(Student student);
+    
 }

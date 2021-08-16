@@ -1,14 +1,23 @@
+package DataTransferObjects;
+
 
 public class ExchangeStudent extends Student {
 
-    private int fee;
+    private int discount = 30;
+    
 
-    public int getFee() {
-        return this.fee;
+    public ExchangeStudent(Integer userID, String fullname, Integer age, String address, int initialFee, Course course) {
+        super(userID, fullname, age, address, initialFee, course);
+    }
+    
+
+
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setFee(int fee) {
-        this.fee = fee;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
 }
