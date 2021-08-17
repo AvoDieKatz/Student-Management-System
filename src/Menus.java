@@ -6,6 +6,8 @@ import DataAccessObjects.IStudent;
 import DataTransferObjects.Course;
 import DataTransferObjects.Student;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -20,6 +22,32 @@ public class Menus {
     ICourse courseDao = new CourseFunc();
     IStudent studentDao = new StudentFunc();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    public boolean login() {
+        try {
+            File loginInfo = new File("/Users/anhtung/Desktop/login.txt");
+            String validUsername;
+            String validPassword;
+            try ( Scanner readInfo = new Scanner(loginInfo)) {
+                validUsername = readInfo.nextLine();
+                validPassword = readInfo.nextLine();
+            }
+            while (true) {
+                System.out.println("Username: ");
+                String username = scanner.nextLine();
+                System.out.println("Password: ");
+                String password = scanner.nextLine();
+                if (username.equals(validUsername) && password.equals(validPassword)) {
+                    break;
+                } else {
+                    System.out.println("Invalid password or username, try again");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 
     //MENUS Interface
     public void main_menu() throws IOException {
@@ -233,7 +261,7 @@ public class Menus {
             }
         }
 
-        void viewAll() {
+        void viewAll() throws IOException {
             if (courseDao.checkEmpty() == false) {
                 System.out.println("----------COURSE LIST----------");
                 try {
@@ -244,6 +272,11 @@ public class Menus {
             } else {
                 System.out.println("----------COURSE LIST----------");
                 System.out.println("\t\tList Empty\n");
+                System.out.println("Do you want to Add Course? (type 'y' to add student), any other key to continue");
+                String opt = br.readLine().toLowerCase();
+                if ("y".equals(opt)) {
+                    add();
+                }
             }
         }
     }
@@ -272,9 +305,8 @@ public class Menus {
                 int age = Integer.parseInt(br.readLine());
                 System.out.print("Enter address: ");
                 String address = br.readLine();
-                System.out.println("Enter initial fee: ");
+                System.out.print("Enter initial fee: ");
                 int initialFee = Integer.parseInt(br.readLine());
-                System.out.println();
                 System.out.println();
                 System.out.println("| Courses Option |");
                 System.out.println("Choose one of the below course: ");
@@ -361,21 +393,6 @@ public class Menus {
                         System.out.println("Invalid input, try again");
                         break;
                 }
-//                System.out.print("Enter name: ");
-//                String name = br.readLine();
-//                System.out.print("Enter age: ");
-//                int age = Integer.parseInt(br.readLine());
-//                System.out.print("Enter address: ");
-//                String address = br.readLine();
-//                System.out.print("Choose one of the below course: ");
-//                courseDao.allCourses();
-//                int course = Integer.parseInt(br.readLine());
-//                try {
-//                    studentDao.editStudent(new Student(userID, name, age, address, courseDao.searchCourse(course)));
-//                    System.out.println("StudentID: " + userID + " has been UPDATED");
-//                } catch (Exception e) {
-//                    System.err.println("Uh ohh! Something wrong while editing student!\n");
-//                }
             } else {
                 System.out.println("""
                                        There are no student available in the database
@@ -420,6 +437,11 @@ public class Menus {
                     }
                 } else {
                     System.out.println("NO RESULT");
+                    System.out.println("Do you want to Add Student? (type 'y' to add student), any other key to continue");
+                    String opt = br.readLine().toLowerCase();
+                    if ("y".equals(opt)) {
+                        add();
+                    }
                 }
             } else {
                 System.out.println("""
@@ -439,13 +461,11 @@ public class Menus {
             } else {
                 System.out.println("----------STUDENT LIST----------");
                 System.out.println("\tList empty\n");
-//                    System.out.println("Do you want to add new Student? (Enter 'y' to add, any other keys to cancle)");
-//                    String option = br.readLine().trim().toLowerCase();
-//                    if (option.equals("y")) {
-//                        studentDao.addSection();
-//                    } else {
-//                        student_menu();
-//                    }
+                System.out.println("Do you want to Add Course? (type 'y' to add student), any other key to continue");
+                String opt = br.readLine().toLowerCase();
+                if ("y".equals(opt)) {
+                    add();
+                }
             }
         }
     }

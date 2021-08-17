@@ -30,16 +30,28 @@ public class Student {
         this.course = course;
     }
 
-    @Override
-    public String toString() {
-        return "Student ID: " + getUserID() + "\n"
-                + "Student Name: " + getFullname() + "\n"
-                + "Student Age: " + getAge() + "\n"
-                + "Student Address: " + getAddress() + "\n"
-                + "Initial Fee: " +getInitialFee() + " USD\n"
-                + "Courses: " + getCourse() + "\n"
-                + "Tuition: " + getTuition() + " USD (Initial fee * credits)\n"
-                + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+//    @Override
+//    public String toString() {
+//        return "Student ID: " + getUserID() + "\n"
+//                + "Student Name: " + getFullname() + "\n"
+//                + "Student Age: " + getAge() + "\n"
+//                + "Student Address: " + getAddress() + "\n"
+//                + "Initial Fee: " +getInitialFee() + " USD\n"
+//                + "Courses: " + getCourse() + "\n"
+//                + "Tuition: " + getTuition() + " USD (Initial fee * credits)\n"
+//                + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+//    }
+    
+    
+    public void display() {
+        System.out.println("-----------------------------------------------------------------------------");
+        System.out.printf("%10s %20s %5s %10s %20s %10s", "STUDENT ID", "NAME", "AGE", "ADDRESS", "COURSE", "TUITION");
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------");
+        System.out.format("%10s %20s %5s %10s %20s %10s",
+                getUserID(), getFullname(), getAge(), getAddress(), getCourse().getCourseName(), getTuition());
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------");
     }
 
     public int getUserID() {
