@@ -87,7 +87,6 @@ public class StudentFunc implements IStudent {
     @Override
     public void calcTuition(Student student) {
         student.setTuition(student.getInitialFee() * student.getCourse().getCredits());
-//        student.setTuition(student.getInitialFee() * student.getTotalcredits());
     }
     
     

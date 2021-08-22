@@ -1,18 +1,18 @@
 package DataTransferObjects;
 
 
-public class Course {
+public abstract class Course {
 
-    private Integer courseID;
+    private String courseID;
     private String courseName;
-    private Integer credits;
+    private int credits;
 
     public Course() {
         
     }
 
     
-    public Course(Integer courseID, String courseName, Integer credits) {
+    public Course(String courseID, String courseName, int credits) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.credits = credits;
@@ -22,14 +22,16 @@ public class Course {
     public String toString() {
         return "Course ID: " +getCourseID()+ "\n"
                 + "Course Name: " +getCourseName()+ "\n"
-                + "Course Credit: " +getCredits()+ "";
+                + "Course Credit: " +getCredits();
     }
+    
+    
 
-    public int getCourseID() {
+    public String getCourseID() {
         return courseID;
     }
 
-    public void setCourseID(Integer courseID) {
+    public void setCourseID(String courseID) {
         this.courseID = courseID;
     }
 
@@ -45,8 +47,18 @@ public class Course {
         return this.credits;
     }
 
-    public void setCredits(Integer credits) {
+    public void setCredits(int credits) {
         this.credits = credits;
+    }
+    
+    public void displayCourseInfo() {
+        System.out.println("Course ID: " +getCourseID() 
+                        + "Course Name: " +getCourseName()
+                        + "Course Credit: " +getCredits());
+    }
+    
+    public void editCredit(int newCredit) {
+        setCredits(newCredit);
     }
 
 }

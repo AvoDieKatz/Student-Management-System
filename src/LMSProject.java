@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class LMSProject {
 
     public static void main(String[] args) throws IOException {
+        Authentication auth = new Authentication();
         Menus menus = new Menus();
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Welcome to my Learning Management System");
@@ -18,7 +19,7 @@ public class LMSProject {
             int opt = scanner.nextInt();
             switch (opt) {
                 case 1:
-                    if (menus.login() == true) {
+                    if (auth.login() == true) {
                         while (true) {
                             menus.main_menu();
                             System.out.println("Enter your choice (Valid options: 1 -> 3)");

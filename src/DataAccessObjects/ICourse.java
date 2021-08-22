@@ -9,27 +9,12 @@ import java.util.List;
  * @author anhtung
  */
 public interface ICourse {
-
-    void addCourse(Course course);
-
-    void editCourse(Course course);
-
-    void deleteCourse(int courseID);
-
-    Course searchCourse(Integer courseID);
-
-    int getCourseElIndex(int courseID);
-
-    boolean checkCourseExist(Integer courseID);
     
-    boolean checkEmpty();
+    void getCourse();
     
-    int checkSize();
-    
-    List<Course> viewAllCourses();
-    
+    void editCourseCredit(Course aCourse, int newCredit);
+
     void allCourses();
     
-    List<Student> viewAttendingStudents();
-
+    void displayCourseInfo(Course aCourse);
 }

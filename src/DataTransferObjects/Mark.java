@@ -10,9 +10,9 @@ package DataTransferObjects;
  *
  * @author anhtung
  */
-public class Gpa {
+public class Mark {
 
-    public Gpa() {
+    public Mark() {
     }
 
     
