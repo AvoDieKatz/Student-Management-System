@@ -13,6 +13,7 @@ package DataTransferObjects;
 public class Mark {
 
     public Mark() {
+        
     }
 
     

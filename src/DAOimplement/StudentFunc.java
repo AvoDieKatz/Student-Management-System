@@ -24,6 +24,7 @@ public class StudentFunc implements IStudent {
     public void editStudent(Student student) {
         if (getStudentElIndex(student.getUserID()) >= 0) {
             studentDetails.getStudentList().set(getStudentElIndex(student.getUserID()), student);
+            calcTuition(student);
         }
     }
 
@@ -55,9 +56,10 @@ public class StudentFunc implements IStudent {
     }
 
     @Override
-    public int getStudentElIndex(int userID) {
+    public int getStudentElIndex(Integer userID) {
         for (Student s : studentDetails.getStudentList()) {
-            if ((userID) == s.getUserID()) {
+            if (userID.equals(s.getUserID())) {
+//            if ((userID) == s.getUserID()) {
                 return studentDetails.getStudentList().indexOf(s);
             }
         }

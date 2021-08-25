@@ -14,7 +14,7 @@ public class WebDevelopmentCourse extends Course {
     public WebDevelopmentCourse() {
         setCourseID("WD");
         setCourseName("Web Development");
-        setCredits(10);
+        setCredits(3);
     }
 
 }

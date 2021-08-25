@@ -1,16 +1,19 @@
 package DataTransferObjects;
 
+import java.util.Objects;
+
 
 public class Student {
 
     
-    private Integer userID = 1;
+    private Integer userID;
     private String fullname;
     private Integer age;
     private String address;
 
     private int tuition;
     private int initialFee;
+    
     private int totalcredits;
 
     private Mark gpa;
@@ -26,6 +29,64 @@ public class Student {
         this.studentCourse = studentCourse;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.userID);
+        hash = 59 * hash + Objects.hashCode(this.fullname);
+        hash = 59 * hash + Objects.hashCode(this.age);
+        hash = 59 * hash + Objects.hashCode(this.address);
+        hash = 59 * hash + this.tuition;
+        hash = 59 * hash + this.initialFee;
+        hash = 59 * hash + this.totalcredits;
+        hash = 59 * hash + Objects.hashCode(this.gpa);
+        hash = 59 * hash + Objects.hashCode(this.studentCourse);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        if (this.tuition != other.tuition) {
+            return false;
+        }
+        if (this.initialFee != other.initialFee) {
+            return false;
+        }
+        if (this.totalcredits != other.totalcredits) {
+            return false;
+        }
+        if (!Objects.equals(this.fullname, other.fullname)) {
+            return false;
+        }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.userID, other.userID)) {
+            return false;
+        }
+        if (!Objects.equals(this.age, other.age)) {
+            return false;
+        }
+        if (!Objects.equals(this.gpa, other.gpa)) {
+            return false;
+        }
+        if (!Objects.equals(this.studentCourse, other.studentCourse)) {
+            return false;
+        }
+        return true;
+    }
+
+
 
     
     
@@ -36,7 +97,10 @@ public class Student {
                 + "Student Age: " + getAge() + "\n"
                 + "Student Address: " + getAddress() + "\n"
                 + "Initial Fee: " +getInitialFee() + " USD\n"
-                + "Course attending: \n" + getCourse() + "\n"
+                + "Course attending: \n"
+                + "\tCourse ID: " +getCourse().getCourseID()+ "\n"
+                + "\tCourse Name: " +getCourse().getCourseName()+ "\n"
+                + "\tCourse Credit: " +getCourse().getCredits()+ " credits\n"
                 + "Student Tuition: " + getTuition() + " USD (Tuition = Initial fee * credits)\n"
                 + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     }

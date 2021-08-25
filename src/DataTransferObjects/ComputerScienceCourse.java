@@ -14,7 +14,7 @@ public class ComputerScienceCourse extends Course{
     public ComputerScienceCourse() {
         setCourseID("CS");
         setCourseName("Computer Science");
-        setCredits(20);
+        setCredits(5);
     }
     
 }

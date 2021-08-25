@@ -15,33 +15,26 @@ import DataTransferObjects.CourseFactory;
  */
 public class CourseFunc implements ICourse {
 
-    CourseFactory courseFactory = new CourseFactory();
-
     @Override
-    public void getCourse() {
-
+    public void getCourse(Course aCourse) {
+        aCourse.displayCourseInfo();
     }
-
-    @Override
-    public void displayCourseInfo(Course aCourse) {
-        
-    }
-    
 
     @Override
     public void editCourseCredit(Course aCourse, int newCredit) {
         aCourse.editCredit(newCredit);
     }
-    
 
     @Override
     public void allCourses() {
+        CourseFactory courseFactory = new CourseFactory();
+        System.out.println("");
         System.out.println(courseFactory.makeCourse("WD"));
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println(courseFactory.makeCourse("SC"));
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println(courseFactory.makeCourse("CS"));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
     }
 

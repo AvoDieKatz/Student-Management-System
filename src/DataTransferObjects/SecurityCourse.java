@@ -14,7 +14,7 @@ public class SecurityCourse extends Course{
     public SecurityCourse() {
         setCourseID("SC");
         setCourseName("Security");
-        setCredits(15);
+        setCredits(7);
     }
 
 }

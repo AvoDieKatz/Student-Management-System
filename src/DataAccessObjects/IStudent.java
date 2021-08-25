@@ -16,7 +16,7 @@ public interface IStudent {
 
     Student searchStudent(int userID);
 
-    int getStudentElIndex(int userID);
+    int getStudentElIndex(Integer userID);
 
     boolean checkStudentExist(Integer userID);
     
