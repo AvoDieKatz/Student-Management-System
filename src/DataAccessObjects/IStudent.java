@@ -1,7 +1,6 @@
 package DataAccessObjects;
 
 import DataTransferObjects.Student;
-import DataTransferObjects.Course;
 import java.util.List;
 
 
@@ -27,10 +26,6 @@ public interface IStudent {
     List<Student> viewAllStudents();
     
     void allStudents();
-    
-    void addToCourse(Course course);
-    
-    void viewAttendingCourses();
     
     void calcTuition(Student student);
     

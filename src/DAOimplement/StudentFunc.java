@@ -1,7 +1,6 @@
 package DAOimplement;
 
 import DataAccessObjects.IStudent;
-import DataTransferObjects.Course;
 import DataTransferObjects.Student;
 import data.StudentDetails;
 import java.util.List;
@@ -51,11 +50,6 @@ public class StudentFunc implements IStudent {
     }
 
     @Override
-    public void viewAttendingCourses() {
-        System.out.println("Developing");
-    }
-
-    @Override
     public int getStudentElIndex(Integer userID) {
         for (Student s : studentDetails.getStudentList()) {
             if (userID.equals(s.getUserID())) {
@@ -79,11 +73,6 @@ public class StudentFunc implements IStudent {
     @Override
     public int checkSize() {
         return studentDetails.getStudentList().size();
-    }
-
-    @Override
-    public void addToCourse(Course course) {
-        System.out.println("Developing");
     }
 
     @Override

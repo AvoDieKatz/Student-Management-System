@@ -31,10 +31,11 @@ public class Menus {
             System.out.println("CURRENT DATA: (Students: " + studentDao.checkSize()
                     + " | Courses: 3)");
             System.out.println();
-            System.out.println("1. Student Management");
-            System.out.println("2. View available Courses:");
-            System.out.println("3. Exit");
-            System.out.print("\nEnter your choice: ");
+            System.out.println("1. Student management");
+            System.out.println("2. View available courses");
+            System.out.println("3. Export Student Information");
+            System.out.println("4. Exit");
+            System.out.print("\nChoose your choice: \n");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
@@ -44,9 +45,12 @@ public class Menus {
                     courseDao.allCourses();
                     break;
                 case "3":
+                    System.out.println("Developing");
+                    break;
+                case "4":
                     System.exit(0);
                 default:
-                    System.out.println("\nInvalid input, try again\n");
+                    System.out.println("\nInvalid input, try 1->3\n");
             }
         }
     }
@@ -56,18 +60,18 @@ public class Menus {
         while (true) {
             System.out.println();
             System.out.println("--------------------------------------------------");
-            System.out.println("-------------------STUDENT MENU--------------------");
+            System.out.println("-------------------STUDENT MENU-------------------");
             System.out.println("--------------------------------------------------");
             System.out.println("1. Add Student");
             System.out.println("2. Update Student");
             System.out.println("3. Search Student");
             System.out.println("4. View All Student");
             System.out.println("5. Back");
-            System.out.print("\nEnter your option: ");
+            System.out.print("\nChoose your option: \n");
             Student_Section student_section = new Student_Section();
             String choice = br.readLine();
             if (null == choice) {
-                System.out.println("\nInvalid input, try 1->6");
+                System.out.println("\nInvalid input, try 1->5\n");
             } else {
                 switch (choice) {
                     case "1" ->
@@ -82,7 +86,7 @@ public class Menus {
                         break OUTER;
                     }
                     default ->
-                        System.out.println("\nInvalid input, try 1->5");
+                        System.out.println("\nInvalid input, try 1->5\n");
                 }
             }
         }
@@ -92,153 +96,182 @@ public class Menus {
 
         void add() throws IOException {
             String input;
+            String cancle = "!cancle";
+
             int userID = 0;
             String name = null;
             int age = 0;
             String address = null;
             int initialFee = 0;
 
-            System.out.println("| Basic Information |");
-
-            //Taking ID
+            OUT:
             while (true) {
-                System.out.print("Enter Student ID: ");
-                input = br.readLine();
-                if (rx.validateNumberInput(input)) {
-                    userID = Integer.parseInt(input);
-                    if (studentDao.checkStudentExist(userID) == false) {
-                        break;
+
+                System.out.println("| Personal Information |");
+
+                //Taking ID
+                while (true) {
+                    System.out.print("Enter Student ID: ");
+                    input = br.readLine();
+                    if ((rx.validateNumberInput(input)) && (!input.equals(cancle))) {
+                        userID = Integer.parseInt(input);
+                        if (studentDao.checkStudentExist(userID) == false) {
+                            break;
+                        } else {
+                            System.out.println("Student ID is duplicated, try again");
+                        }
+                    } else if (input.equals(cancle)) {
+                        break OUT;
                     } else {
-                        System.out.println("Student ID is duplicated, try again");
+                        System.out.println("Make sure 'ID' only contain numbers");
                     }
-                } else {
-                    System.out.println("Make sure 'ID' only contain numbers");
-                }
-            }
 
-            //Taking Name
-            while (true) {
-                System.out.print("Enter name: ");
-                name = br.readLine();
-                if (rx.validateNameInput(name)) {
-                    break;
-                } else {
-                    System.out.println("Is Elon Musk your father?");
                 }
-            }
 
-            //Taking Age
-            while (true) {
-                System.out.print("Enter age: ");
-                input = br.readLine();
-                if (rx.validateNumberInput(input)) {
-                    age = Integer.parseInt(input);
-                    if ((16 <= age) & (age <= 60)) {
+                //Taking Name
+                while (true) {
+                    System.out.print("Enter name: ");
+                    name = br.readLine();
+                    if ((rx.validateNameInput(name)) && (!name.equals(cancle))) {
                         break;
+                    } else if (name.equals(cancle)) {
+                        break OUT;
                     } else {
-                        System.out.println("Invalid age, the valid age range from 16-60, try again");
+                        System.out.println("Is Elon Musk your father?");
                     }
-                } else {
-                    System.out.println("Make sure 'Age' only contain numbers");
                 }
-            }
 
-            //Taking address
-            while (true) {
-                System.out.print("Enter address: ");
-                String input_address = br.readLine();
-                if (rx.validateNameInput(input_address)) {
-                    String input_address_cap = input_address.substring(0, 1).toUpperCase();
-                    address = input_address_cap + input_address.substring(1);
-                    break;
-                } else {
-                    System.out.println("Make sure you use letters only");
+                //Taking Age
+                while (true) {
+                    System.out.print("Enter age: ");
+                    input = br.readLine();
+                    if ((rx.validateNumberInput(input)) && (!input.equals(cancle))) {
+                        age = Integer.parseInt(input);
+                        if ((16 <= age) & (age <= 60)) {
+                            break;
+                        } else {
+                            System.out.println("Invalid age, the valid age range from 16-60, try again");
+                        }
+                    } else if (input.equals(cancle)) {
+                        break OUT;
+                    } else {
+                        System.out.println("Make sure 'Age' only contain numbers");
+                    }
                 }
-            }
 
-            //Taking Initial Fee
-            while (true) {
-                System.out.print("Enter initial fee (USD): ");
-                input = br.readLine();
-                if (rx.validateNumberInput(input)) {
-                    initialFee = Integer.parseInt(input);
-                    break;
-                } else {
-                    System.out.println("Make sure 'Initial Fee' only contain number");
+                //Taking address
+                while (true) {
+                    System.out.print("Enter address: ");
+                    String input_address = br.readLine();
+                    if ((rx.validateAddressInput(input_address)) && (!input_address.equals(cancle))) {
+                        String input_address_cap = input_address.substring(0, 1).toUpperCase();
+                        address = input_address_cap + input_address.substring(1);
+                        break;
+                    } else if (input_address.equals(cancle)) {
+                        break OUT;
+                    } else {
+                        System.out.println("Sound like not an address...");
+                    }
                 }
-            }
 
-            //Taking Course Information
-            System.out.println();
-            System.out.println("| Courses Option |");
-            System.out.println("Choose one of the below course:\n");
-            courseDao.allCourses();
+                //Taking Initial Fee
+                while (true) {
+                    System.out.print("Enter initial fee (USD): ");
+                    input = br.readLine();
+                    if ((rx.validateNumberInput(input)) && (!input.equals(cancle))) {
+                        initialFee = Integer.parseInt(input);
+                        break;
+                    } else if (input.equals(cancle)) {
+                        break OUT;
+                    } else {
+                        System.out.println("Make sure 'Initial Fee' only contain number");
+                    }
+                }
 
-            //field to store Course variable get from Factory
-            Course studentCourse = null;
-
-            while (true) {
+                //Taking Course Information
                 System.out.println();
-                System.out.print("Enter the ID of the course you want: ");
-                if (scanner.hasNextLine()) {
-                    String optionOfCourse = scanner.nextLine().toUpperCase();
+                System.out.println("| Courses Option |");
+                System.out.println("Choose one of the below course:\n");
+                courseDao.allCourses();
 
-                    studentCourse = courseFactory.makeCourse(optionOfCourse);
+                //field to store Course variable get from Factory
+                Course studentCourse = null;
+
+                while (true) {
+                    System.out.println();
+                    System.out.print("Enter the ID of the course you want: ");
+                    if (scanner.hasNextLine()) {
+                        String optionOfCourse = scanner.nextLine().toUpperCase();
+
+                        studentCourse = courseFactory.makeCourse(optionOfCourse);
+
+                    }
+
+                    if (studentCourse != null) {
+                        break;
+                    } else {
+                        System.out.println("\nInvalid course ID, try wd / cs / sc");
+                    }
 
                 }
 
-                if (studentCourse != null) {
-                    break;
-                } else {
-                    System.out.println("\nInvalid course ID, try wd / cs / sc");
+                //Put everything to Student
+                try {
+                    studentDao.addStudent(new Student(userID, name, age, address, initialFee, studentCourse));
+                    System.out.println("!!! Student Added Successfully !!!");
+                    break OUT;
+                } catch (Exception e) {
+                    System.err.println("Uh ohh! Somehing wrong while adding student\n");
+                    System.err.print(e);
                 }
-
             }
 
-            //Put everything to Student
-            try {
-                studentDao.addStudent(new Student(userID, name, age, address, initialFee, studentCourse));
-                System.out.println("!!! Student Added Successfully !!!");
-            } catch (Exception e) {
-                System.err.println("Uh ohh! Somehing wrong while adding student\n");
-                System.err.print(e);
-            }
         }
 
         void edit() throws IOException {
             String input;
+            String cancle = "!cancle";
+
             int userID = 0;
             String name = null;
             int age = 0;
             String address = null;
             int initialFee = 0;
 
+            //While loop to !cancle while choosing ID to edit
+            
+            
+            //Check if Student List empty?
             if (studentDao.checkEmpty() == false) {
 
                 //Check for ID existance
-                while (true) {
-                    System.out.print("Enter student ID to UPDATE: ");
-                    input = br.readLine();
-                    if (rx.validateNumberInput(input)) {
-                        userID = Integer.parseInt(input);
-                        if (studentDao.checkStudentExist(userID) == true) {
-                            break;
-                        } else {
-                            System.out.println("The student you are trying to edit does not present in the data");
-                        }
+                System.out.print("Enter student ID to UPDATE: ");
+                input = br.readLine();
+                
+                if (rx.validateNumberInput(input)) {
+                    userID = Integer.parseInt(input);
+                    if (studentDao.checkStudentExist(userID) == true) {
+                        
                     } else {
-                        System.out.println("'ID' can only have numbers, try again");
+                        System.out.println("The student you are trying to edit does not present in the data");
                     }
+                } else {
+                    System.out.println("'ID' can only have numbers, try again");
                 }
 
                 OUT:
                 while (true) {
-                    System.out.println("Modifying Student ID " + userID);
+                    System.out.println();
+                    System.out.println("--------------------------------------");
+                    System.out.println("| Modifying Student ID " + userID+ " |");
+                    System.out.println("--------------------------------------");
                     System.out.println("1. Update personal's information");
                     System.out.println("2. Update marks");
                     System.out.println("3. Delete");
                     System.out.println("4. Back");
+                    System.out.print("\nChoose your option: \n");
                     String choice = scanner.nextLine(); //readline().matches(regex));
+                    OUTER:
                     switch (choice) {
                         case "1":
 
@@ -246,8 +279,10 @@ public class Menus {
                             while (true) {
                                 System.out.print("Enter name: ");
                                 name = br.readLine();
-                                if (rx.validateNameInput(name)) {
+                                if ((rx.validateNameInput(name)) && (!name.equals(cancle))) {
                                     break;
+                                } else if (name.equals(cancle)) {
+                                    break OUTER;
                                 } else {
                                     System.out.println("Is Elon Musk your father?");
                                 }
@@ -257,13 +292,15 @@ public class Menus {
                             while (true) {
                                 System.out.print("Enter age: ");
                                 input = br.readLine();
-                                if (rx.validateNumberInput(input)) {
+                                if ((rx.validateNumberInput(input)) && (!input.equals(cancle))) {
                                     age = Integer.parseInt(input);
                                     if ((16 <= age) & (age <= 60)) {
                                         break;
                                     } else {
                                         System.out.println("Invalid age, the valid age range from 16-60, try again");
                                     }
+                                } else if (input.equals(cancle)) {
+                                    break OUTER;
                                 } else {
                                     System.out.println("Make sure 'Age' only contain numbers");
                                 }
@@ -273,12 +310,14 @@ public class Menus {
                             while (true) {
                                 System.out.print("Enter address: ");
                                 String input_address = br.readLine();
-                                if (rx.validateNameInput(input_address)) {
+                                if ((rx.validateAddressInput(input_address)) && (!input_address.equals(cancle))) {
                                     String input_address_cap = input_address.substring(0, 1).toUpperCase();
                                     address = input_address_cap + input_address.substring(1);
                                     break;
+                                } else if (input_address.equals(cancle)) {
+                                    break OUTER;
                                 } else {
-                                    System.out.println("Make sure you use letters only");
+                                    System.out.println("Sound not like an address...");
                                 }
                             }
 
@@ -286,9 +325,11 @@ public class Menus {
                             while (true) {
                                 System.out.print("Enter initial fee (USD): ");
                                 input = br.readLine();
-                                if (rx.validateNumberInput(input)) {
+                                if ((rx.validateNumberInput(input)) && (!input.equals(cancle))) {
                                     initialFee = Integer.parseInt(input);
                                     break;
+                                } else if (input.equals(cancle)) {
+                                    break OUTER;
                                 } else {
                                     System.out.println("Make sure 'Initial Fee' only contain number");
                                 }
@@ -382,7 +423,7 @@ public class Menus {
         }
 
         void viewAll() throws IOException {
-            System.out.println("†----------------STUDENT LIST---------------†");
+            System.out.println("†------------------STUDENT LIST-----------------†");
             if (studentDao.checkEmpty() == false) {
                 try {
                     studentDao.allStudents();
@@ -403,6 +444,7 @@ public class Menus {
                     }
                 }
             }
+            System.out.println("†-----------------------------------------------†");
         }
     }
 }

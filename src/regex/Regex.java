@@ -25,10 +25,10 @@ public class Regex {
 //        boolean matchFound = m.find();
 //        return matchFound;
         
-        return Pattern.matches("^[A-Za-z]+$", string);
+        return Pattern.matches("^[A-Za-z ]+$", string);
     }
     
     public boolean validateAddressInput(String string) {
-        return Pattern.matches("^[0-9][A-Za-z]+$", string);
+        return Pattern.matches("^[0-9 A-Za-z]+$", string);
     }
 }
